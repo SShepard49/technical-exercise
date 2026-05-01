@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { environment } from '../environments/environment';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,13 @@ export const routes: Routes = [
     title: 'ACTS · Roster',
     loadComponent: () =>
       import('./features/people/people-list.page').then((m) => m.PeopleListPage),
+  },
+  {
+    path: 'api-error-test',
+    title: 'API Error Test',
+    canMatch: [() => !environment.production],
+    loadComponent: () =>
+      import('./features/api-error-test/api-error-test.page').then((m) => m.ApiErrorTestPage),
   },
   {
     path: 'people/:name',

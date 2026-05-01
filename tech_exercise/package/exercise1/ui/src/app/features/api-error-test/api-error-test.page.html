@@ -1,0 +1,28 @@
+<section class="page">
+  <header class="page-header">
+    <p class="overline">Internal Tool</p>
+    <h1>API Error Test</h1>
+    <p class="subtitle">
+      Hidden development-only page for verifying toastr behavior through real HTTP failures.
+    </p>
+  </header>
+
+  <mat-card appearance="outlined" class="actions-card">
+    <mat-card-content class="actions">
+      <button mat-raised-button color="primary" type="button" (click)="showSuccessToast()">
+        <mat-icon aria-hidden="true">check_circle</mat-icon>
+        Show success toast
+      </button>
+
+      <button mat-raised-button color="accent" type="button" (click)="trigger4xxToast()">
+        <mat-icon aria-hidden="true">warning</mat-icon>
+        Trigger 4xx toast
+      </button>
+
+      <button mat-raised-button color="warn" type="button" (click)="triggerNetworkToast()">
+        <mat-icon aria-hidden="true">error</mat-icon>
+        Trigger network/server toast
+      </button>
+    </mat-card-content>
+  </mat-card>
+</section>
