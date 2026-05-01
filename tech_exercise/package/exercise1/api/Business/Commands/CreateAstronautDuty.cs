@@ -16,8 +16,10 @@ namespace StargateAPI.Business.Commands
 
         public required string DutyTitle { get; set; }
 
-        public DateOnly DutyStartDate { get; set; }
+        public DateOnly DutyStartDate { get; set; } //changed DateTime to DateOnly for simplicity.
     }
+
+    //Added some defensive coding
 
     public class CreateAstronautDutyPreProcessor : IRequestPreProcessor<CreateAstronautDuty>
     {

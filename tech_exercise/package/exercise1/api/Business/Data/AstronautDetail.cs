@@ -15,9 +15,9 @@ namespace StargateAPI.Business.Data
 
         public string CurrentDutyTitle { get; set; } = string.Empty;
 
-        public DateOnly CareerStartDate { get; set; }
+        public DateOnly CareerStartDate { get; set; } //changed DateTime to DateOnly for simplicity.
 
-        public DateOnly? CareerEndDate { get; set; }
+        public DateOnly? CareerEndDate { get; set; } //changed DateTime to DateOnly for simplicity.
 
         public virtual Person? Person { get; set; }
     }
@@ -29,6 +29,7 @@ namespace StargateAPI.Business.Data
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
+            //AstronautDetail cannot exist without a Person
             builder.HasOne(x => x.Person)
                 .WithOne(x => x.AstronautDetail)
                 .HasForeignKey<AstronautDetail>(x => x.PersonId)

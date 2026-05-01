@@ -10,9 +10,9 @@
 
         public string CurrentDutyTitle { get; set; } = string.Empty;
 
-        public DateOnly? CareerStartDate { get; set; }
+        public DateOnly? CareerStartDate { get; set; } //changed DateTime to DateOnly for simplicity.
 
-        public DateOnly? CareerEndDate { get; set; }
+        public DateOnly? CareerEndDate { get; set; } //changed DateTime to DateOnly for simplicity.
 
         public bool IsRetired => string.Equals(CurrentDutyTitle, "RETIRED", StringComparison.OrdinalIgnoreCase);
     }

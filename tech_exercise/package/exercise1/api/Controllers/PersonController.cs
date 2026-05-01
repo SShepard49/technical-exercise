@@ -22,6 +22,7 @@ namespace StargateAPI.Controllers
             var result = await _mediator.Send(new GetPeople()
             {
             });
+            //Moved exception handling to middleware
 
             return this.GetResponse(result);
         }
@@ -33,6 +34,7 @@ namespace StargateAPI.Controllers
             {
                 Name = name
             });
+            //Moved exception handling to middleware
 
             return this.GetResponse(result);
         }
@@ -44,13 +46,14 @@ namespace StargateAPI.Controllers
             {
                 Name = name
             });
-
+            //Moved exception handling to middleware
             return this.GetResponse(result);
         }
 
         [HttpPut("{name}")]
         public async Task<IActionResult> UpdatePersonByName(string name, [FromBody] UpdatePersonRequest request)
         {
+            //Created missing UpdatePersonByName command
             var command = new UpdatePersonByName
             {
                 RouteName = name,

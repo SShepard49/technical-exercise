@@ -1,0 +1,34 @@
+<div class="app-shell">
+  <mat-toolbar class="app-toolbar" color="primary">
+    <a routerLink="/" class="brand" aria-label="ACTS home">
+      <mat-icon class="brand-icon" aria-hidden="true">satellite_alt</mat-icon>
+      <span class="brand-text">
+        <span class="brand-acronym">ACTS</span>
+        <span class="brand-tagline">Astronaut Career Tracking System</span>
+      </span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      <a
+        mat-button
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Home
+      </a>
+      <a mat-button routerLink="/people" routerLinkActive="active">Roster</a>
+    </nav>
+  </mat-toolbar>
+
+  <mat-progress-bar
+    class="global-progress"
+    mode="indeterminate"
+    [class.is-visible]="loading.isLoading()"
+    aria-hidden="true"
+  ></mat-progress-bar>
+
+  <main class="app-main">
+    <router-outlet />
+  </main>
+</div>

@@ -19,6 +19,7 @@ namespace StargateAPI.Business.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(StargateContext).Assembly);
+            //Moved SeedDate to it's own class
             base.OnModelCreating(modelBuilder);
         }
     }

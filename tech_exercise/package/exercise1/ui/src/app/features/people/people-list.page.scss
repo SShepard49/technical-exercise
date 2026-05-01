@@ -1,0 +1,119 @@
+:host {
+  display: block;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  max-width: 80rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-header {
+  .overline {
+    margin: 0 0 0.25rem;
+    font: var(--mat-sys-label-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  h1 {
+    margin: 0 0 0.5rem;
+    font: var(--mat-sys-headline-large);
+    font-weight: 600;
+    color: var(--mat-sys-on-surface);
+  }
+
+  .subtitle {
+    margin: 0;
+    color: var(--mat-sys-on-surface-variant);
+    font: var(--mat-sys-body-large);
+    max-width: 60ch;
+  }
+}
+
+.filters-card {
+  border-radius: 1rem;
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    padding-block: 0.5rem;
+  }
+
+  .search-field {
+    flex: 1 1 18rem;
+    min-width: 14rem;
+  }
+
+  .status-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    mat-chip-option mat-icon {
+      font-size: 1rem;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+.status-card {
+  border-radius: 1rem;
+
+  .status-card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding-block: 2rem;
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+.table-card {
+  border-radius: 1rem;
+  padding: 0;
+  overflow: hidden;
+
+  .table-scroll {
+    overflow-x: auto;
+  }
+
+  .astronauts-table {
+    width: 100%;
+    background: transparent;
+  }
+
+  .astronaut-row {
+    cursor: pointer;
+    transition: background-color 120ms ease;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--mat-sys-primary) 6%, transparent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--mat-sys-primary);
+      outline-offset: -2px;
+    }
+  }
+
+  .name-link {
+    color: var(--mat-sys-primary);
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+}

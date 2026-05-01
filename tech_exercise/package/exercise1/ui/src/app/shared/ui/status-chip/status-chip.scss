@@ -1,0 +1,24 @@
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font: var(--mat-sys-label-medium);
+  white-space: nowrap;
+
+  .material-icons {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  &.is-active {
+    background-color: color-mix(in srgb, var(--mat-sys-primary) 16%, transparent);
+    color: var(--mat-sys-primary);
+  }
+
+  &.is-retired {
+    background-color: color-mix(in srgb, var(--mat-sys-tertiary) 18%, transparent);
+    color: var(--mat-sys-tertiary);
+  }
+}

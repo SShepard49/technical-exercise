@@ -1,0 +1,129 @@
+:host {
+  display: block;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  max-width: 70rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.back-link {
+  align-self: flex-start;
+
+  mat-icon {
+    margin-inline-end: 0.25rem;
+  }
+}
+
+.status-card,
+.summary-card,
+.timeline-card {
+  border-radius: 1rem;
+}
+
+.status-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 2rem;
+  color: var(--mat-sys-on-surface-variant);
+}
+
+.summary-card {
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--mat-sys-primary-container) 55%, transparent) 0%,
+      transparent 60%
+    ),
+    var(--mat-sys-surface-container-low);
+
+  .summary-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .summary-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .overline {
+      margin: 0;
+      font: var(--mat-sys-label-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--mat-sys-on-surface-variant);
+    }
+
+    h1 {
+      margin: 0;
+      font: var(--mat-sys-headline-large);
+      font-weight: 600;
+      color: var(--mat-sys-on-surface);
+    }
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem 2rem;
+    margin: 1.5rem 0 0;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 0;
+
+    dt {
+      margin: 0;
+      font: var(--mat-sys-label-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--mat-sys-on-surface-variant);
+    }
+
+    dd {
+      margin: 0;
+      font: var(--mat-sys-title-medium);
+      color: var(--mat-sys-on-surface);
+    }
+  }
+}
+
+.timeline-card {
+  .timeline-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin-bottom: 1.25rem;
+
+    h2 {
+      margin: 0;
+      font: var(--mat-sys-title-large);
+      font-weight: 600;
+      color: var(--mat-sys-on-surface);
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--mat-sys-on-surface-variant);
+      font: var(--mat-sys-body-medium);
+    }
+  }
+}

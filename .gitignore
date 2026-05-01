@@ -1,2 +1,41 @@
+# Build artifacts
+**/bin/
+**/obj/
 App_Data/
+
+# Test output and coverage
 **/TestResults/
+**/coverage/
+**/*.trx
+**/*.coverage
+**/*.coveragexml
+
+# Local runtime/development files
+**/*.db
+**/*.db-shm
+**/*.db-wal
+**/*.log
+
+# Visual Studio / VS Code / Rider
+.vs/
+**/.vs/
+.idea/
+**/.idea/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Node / UI artifacts (including nested UI app)
+**/node_modules/
+**/dist/
+**/.angular/cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db

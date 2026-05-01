@@ -7,6 +7,9 @@ using StargateAPI.Infrastructure.Exceptions;
 
 namespace StargateAPI.Business.Commands
 {
+
+    //Added some defensive coding
+
     public class CreatePerson : IRequest<CreatePersonResult>
     {
         public required string Name { get; set; } = string.Empty;

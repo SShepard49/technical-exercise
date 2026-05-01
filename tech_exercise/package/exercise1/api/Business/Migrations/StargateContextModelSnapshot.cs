@@ -12,6 +12,8 @@ namespace StargateAPI.Migrations
     [DbContext(typeof(StargateContext))]
     partial class StargateContextModelSnapshot : ModelSnapshot
     {
+        //changed DateTime to DateOnly for simplicity. These fields are sent in by client and only used as a Date field.
+        
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
@@ -73,10 +75,12 @@ namespace StargateAPI.Migrations
 
                     b.HasKey("Id");
 
+                    //Each person can have at most one “active” duty record at a time.
                     b.HasIndex("PersonId")
                         .IsUnique()
                         .HasFilter("\"DutyEndDate\" IS NULL");
 
+                    //A Person will only ever hold one current Astronaut Duty Title, Start Date, and Rank at a time.
                     b.HasIndex("PersonId", "DutyTitle", "DutyStartDate")
                         .IsUnique();
 
@@ -95,12 +99,14 @@ namespace StargateAPI.Migrations
 
                     b.HasKey("Id");
 
+                    //A Person is uniquely identified by their Name.
                     b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Person");
                 });
 
+            //Implement process logging 
             modelBuilder.Entity("StargateAPI.Business.Data.ProcessLog", b =>
                 {
                     b.Property<int>("Id")

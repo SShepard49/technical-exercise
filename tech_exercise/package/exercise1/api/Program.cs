@@ -9,10 +9,22 @@ using StargateAPI.Infrastructure.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
+const string DevCorsPolicy = "AcsUiDev";
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Development-only CORS policy so the Angular dev server (ng serve, default port 4200)
+// can call the API from the browser. Production behavior is unchanged.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(DevCorsPolicy, policy => policy
+        .WithOrigins("http://localhost:4200")
+        .AllowAnyHeader()
+        .AllowAnyMethod());
+});
 
 // Putting the database in the App_Data directory to avoid potential issues with the default location.
 var rawConnectionString = builder.Configuration.GetConnectionString("StarbaseApiDatabase")
@@ -49,6 +61,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(DevCorsPolicy);
 }
 
 app.UseHttpsRedirection();

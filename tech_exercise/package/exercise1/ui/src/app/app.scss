@@ -1,0 +1,84 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: inherit;
+    text-decoration: none;
+    line-height: 1.1;
+
+    .brand-icon {
+      font-size: 1.6rem;
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-acronym {
+      font: var(--mat-sys-title-medium);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-tagline {
+      font: var(--mat-sys-label-small);
+      opacity: 0.85;
+    }
+
+    @media (max-width: 480px) {
+      .brand-tagline {
+        display: none;
+      }
+    }
+  }
+
+  .primary-nav {
+    margin-inline-start: auto;
+    display: flex;
+    gap: 0.25rem;
+
+    a.active {
+      background-color: color-mix(in srgb, currentColor 14%, transparent);
+    }
+  }
+}
+
+.global-progress {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 150ms ease;
+  pointer-events: none;
+
+  &.is-visible {
+    opacity: 1;
+  }
+}
+
+.app-main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}

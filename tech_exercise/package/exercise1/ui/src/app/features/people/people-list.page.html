@@ -1,0 +1,146 @@
+<section class="page">
+  <header class="page-header">
+    <div class="page-titles">
+      <p class="overline">Roster</p>
+      <h1>Astronauts</h1>
+      <p class="subtitle">
+        Active and retired astronauts on record. Click a row to see their full duty history.
+      </p>
+    </div>
+  </header>
+
+  <mat-card appearance="outlined" class="filters-card">
+    <mat-card-content class="filters">
+      <mat-form-field appearance="outline" class="search-field" subscriptSizing="dynamic">
+        <mat-label>Search by name</mat-label>
+        <mat-icon matPrefix aria-hidden="true">search</mat-icon>
+        <input
+          matInput
+          type="search"
+          autocomplete="off"
+          [ngModel]="searchTerm()"
+          (ngModelChange)="onSearch($event)"
+          aria-label="Search astronauts by name"
+        />
+        @if (searchTerm()) {
+          <button
+            type="button"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear search"
+            (click)="onSearch('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        }
+      </mat-form-field>
+
+      <mat-chip-set aria-label="Filter by status" class="status-filters">
+        <mat-chip-option
+          [selected]="isFilterSelected('active')"
+          (selectionChange)="onFilterSelectionChange('active', $event)"
+        >
+          <mat-icon aria-hidden="true">rocket_launch</mat-icon>
+          Active
+        </mat-chip-option>
+        <mat-chip-option
+          [selected]="isFilterSelected('retired')"
+          (selectionChange)="onFilterSelectionChange('retired', $event)"
+        >
+          <mat-icon aria-hidden="true">flag</mat-icon>
+          Retired
+        </mat-chip-option>
+      </mat-chip-set>
+    </mat-card-content>
+  </mat-card>
+
+  @if (loading()) {
+    <mat-card appearance="outlined" class="status-card">
+      <mat-card-content class="status-card-body">
+        <mat-progress-spinner mode="indeterminate" diameter="36"></mat-progress-spinner>
+        <p>Loading roster&hellip;</p>
+      </mat-card-content>
+    </mat-card>
+  } @else if (errored()) {
+    <mat-card appearance="outlined" class="status-card">
+      <mat-card-content>
+        <app-empty-state
+          icon="cloud_off"
+          title="We couldn't reach the Stargate API"
+          description="Check that the API is running on http://localhost:5204 and try again."
+        >
+          <button mat-stroked-button color="primary" (click)="retry()">
+            <mat-icon>refresh</mat-icon>
+            Retry
+          </button>
+        </app-empty-state>
+      </mat-card-content>
+    </mat-card>
+  } @else if (!hasAnyAstronauts()) {
+    <mat-card appearance="outlined" class="status-card">
+      <mat-card-content>
+        <app-empty-state
+          icon="rocket"
+          title="No astronauts yet"
+          description="The roster is empty. Astronaut records are populated by an external service."
+        />
+      </mat-card-content>
+    </mat-card>
+  } @else if (!hasResults()) {
+    <mat-card appearance="outlined" class="status-card">
+      <mat-card-content>
+        <app-empty-state
+          icon="search_off"
+          title="No matches"
+          description="Try a different name or adjust the status filters."
+        />
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card appearance="outlined" class="table-card">
+      <div class="table-scroll">
+        <table mat-table [dataSource]="dataSource" matSort class="astronauts-table">
+          <ng-container matColumnDef="name">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <td mat-cell *matCellDef="let person">
+              <a class="name-link" [routerLink]="['/people', person.name]">
+                {{ person.name }}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+            <td mat-cell *matCellDef="let person">
+              <app-status-chip [person]="person" />
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="currentRank">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Rank</th>
+            <td mat-cell *matCellDef="let person">{{ person.currentRank || '\u2014' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="currentDuty">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Current duty</th>
+            <td mat-cell *matCellDef="let person">{{ person.currentDutyTitle || '\u2014' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="careerStart">
+            <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>Career start</th>
+            <td mat-cell *matCellDef="let person">{{ person.careerStartDate | dateOnly }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr
+            mat-row
+            *matRowDef="let person; columns: displayedColumns"
+            class="astronaut-row"
+            [routerLink]="['/people', person.name]"
+            [attr.aria-label]="'View astronaut details for ' + person.name"
+          ></tr>
+        </table>
+      </div>
+    </mat-card>
+  }
+</section>

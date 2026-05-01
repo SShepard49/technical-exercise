@@ -29,6 +29,7 @@ namespace StargateAPI.Business.Data
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
+            //AstronautDuty cannot exist without a Person
             builder.HasOne(x => x.Person)
                 .WithMany(x => x.AstronautDuties)
                 .HasForeignKey(x => x.PersonId)

@@ -1,0 +1,112 @@
+<section class="page">
+  <a mat-button routerLink="/people" class="back-link">
+    <mat-icon aria-hidden="true">arrow_back</mat-icon>
+    Back to roster
+  </a>
+
+  @if (loading()) {
+    <mat-card appearance="outlined" class="status-card">
+      <mat-card-content class="status-card-body">
+        <mat-progress-spinner mode="indeterminate" diameter="36"></mat-progress-spinner>
+        <p>Loading astronaut detail&hellip;</p>
+      </mat-card-content>
+    </mat-card>
+  } @else if (errored()) {
+    <mat-card appearance="outlined" class="status-card">
+      <mat-card-content>
+        <app-empty-state
+          icon="cloud_off"
+          title="We couldn't reach the Stargate API"
+          description="Check that the API is running and try again."
+        >
+          <a mat-stroked-button color="primary" routerLink="/people">
+            <mat-icon>arrow_back</mat-icon>
+            Back to roster
+          </a>
+        </app-empty-state>
+      </mat-card-content>
+    </mat-card>
+  } @else if (!person()) {
+    <mat-card appearance="outlined" class="status-card">
+      <mat-card-content>
+        <app-empty-state
+          icon="person_off"
+          [title]="'No record for &quot;' + name() + '&quot;'"
+          description="That name was not found on the master roster."
+        >
+          <a mat-stroked-button color="primary" routerLink="/people">
+            <mat-icon>arrow_back</mat-icon>
+            Back to roster
+          </a>
+        </app-empty-state>
+      </mat-card-content>
+    </mat-card>
+  } @else if (!hasAstronautRecord()) {
+    <mat-card appearance="outlined" class="status-card">
+      <mat-card-content>
+        <app-empty-state
+          icon="rocket"
+          [title]="person()!.name + ' is not an astronaut'"
+          description="This person is on the master roster but has no astronaut record yet."
+        >
+          <a mat-stroked-button color="primary" routerLink="/people">
+            <mat-icon>arrow_back</mat-icon>
+            Back to roster
+          </a>
+        </app-empty-state>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <mat-card appearance="outlined" class="summary-card">
+      <mat-card-content>
+        <div class="summary-head">
+          <div class="summary-titles">
+            <p class="overline">Astronaut</p>
+            <h1>{{ person()!.name }}</h1>
+            <app-status-chip [person]="person()!" />
+          </div>
+        </div>
+
+        <dl class="summary-grid">
+          <div class="summary-item">
+            <dt>Current rank</dt>
+            <dd>{{ person()!.currentRank || '\u2014' }}</dd>
+          </div>
+          <div class="summary-item">
+            <dt>Current duty</dt>
+            <dd>{{ person()!.currentDutyTitle || '\u2014' }}</dd>
+          </div>
+          <div class="summary-item">
+            <dt>Career start</dt>
+            <dd>{{ person()!.careerStartDate | dateOnly }}</dd>
+          </div>
+          <div class="summary-item">
+            <dt>Career end</dt>
+            <dd>
+              {{ person()!.careerEndDate ? (person()!.careerEndDate | dateOnly) : '— present' }}
+            </dd>
+          </div>
+        </dl>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined" class="timeline-card">
+      <mat-card-content>
+        <header class="timeline-header">
+          <h2>Duty history</h2>
+          <p class="subtitle">{{ duties().length }} duty assignment(s) on record.</p>
+        </header>
+
+        @if (duties().length === 0) {
+          <app-empty-state
+            icon="history"
+            title="No duties recorded"
+            description="This astronaut does not have any duty entries yet."
+          />
+        } @else {
+          <app-duty-timeline [duties]="duties()" />
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+</section>

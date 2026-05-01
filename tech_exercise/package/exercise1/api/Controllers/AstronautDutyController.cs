@@ -22,7 +22,7 @@ namespace StargateAPI.Controllers
             {
                 Name = name
             });
-
+            //Moved exception handling to middleware
             return this.GetResponse(result);
         }
 
