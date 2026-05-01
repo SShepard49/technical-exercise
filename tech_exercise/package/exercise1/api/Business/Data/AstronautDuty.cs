@@ -15,9 +15,9 @@ namespace StargateAPI.Business.Data
 
         public string DutyTitle { get; set; } = string.Empty;
 
-        public DateOnly DutyStartDate { get; set; }
+        public DateOnly DutyStartDate { get; set; } //changed DateTime to DateOnly for simplicity.
 
-        public DateOnly? DutyEndDate { get; set; }
+        public DateOnly? DutyEndDate { get; set; } //changed DateTime to DateOnly for simplicity.
 
         public virtual Person? Person { get; set; }
     }

@@ -30,4 +30,4 @@ API responses are surfaced via `ngx-toastr` through `NotificationService`:
 - **4xx** -> warning toast carrying `BaseResponse.message`.
 - **5xx** or network failure -> error toast with a generic message; the original error is logged to the console for diagnostics.
 
-The UI does not call any API mutation endpoints because, per the project description, ACTS data is updated by an external service.
+The UI does not call any add/ update endpoints because ACTS data is updated by an external service.
